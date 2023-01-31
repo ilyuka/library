@@ -1,6 +1,7 @@
-const myLibrary = [];
-
 const bookList = document.querySelector("ul.library");
+const form = document.querySelector("form");
+
+const myLibrary = [];
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -13,11 +14,26 @@ Book.prototype.info = function () {
   return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}.`;
 };
 
-function addBookToLibrary(book) {
+function addBookToLibrary() {
+  const title = document.getElementById("title").value;
+  const author = document.getElementById("author").value;
+  const pages = document.getElementById("pages").value;
+  const read = document.getElementById("read").checked;
+
+  const book = new Book(title, author, pages, read);
+  const li = document.createElement("li");
+  li.textContent = book.info();
   myLibrary.push(book);
+  bookList.appendChild(li);
 }
 
-// add check for empty booksss
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  addBookToLibrary();
+  form.reset();
+});
+
+// add check for empty books
 function displayAllBooks() {
   for (let i = 0; i < myLibrary.length; i += 1) {
     const book = document.createElement("li");
@@ -25,13 +41,3 @@ function displayAllBooks() {
     bookList.appendChild(book);
   }
 }
-
-const harryPotter = new Book("harry potter", "j k rowling", 194, true);
-const harryPot = new Book("harry pot", "j king", 194, false);
-const empty = new Book();
-
-addBookToLibrary(harryPotter);
-addBookToLibrary(harryPot);
-addBookToLibrary(empty);
-
-displayAllBooks();

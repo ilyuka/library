@@ -6,12 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="./main.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main>
       <h1>Library</h1>
       <p>add new book:</p>
-      <form action=""></form>
+      <form action="">
+        <label for="title">title</label>
+        <input type="text" id="title" />
+
+        <label for="author">author</label>
+        <input type="text" id="author" />
+
+        <label for="pages">pages</label>
+        <input type="number" id="pages" min="0" />
+
+        <label for="read">read</label>
+        <input type="checkbox" id="read" />
+
+        <button type="submit">add book</button>
+      </form>
       <ul class="library"></ul>
     </main>
   </body>
