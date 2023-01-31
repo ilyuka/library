@@ -17,7 +17,7 @@ function addBookToLibrary(book) {
   myLibrary.push(book);
 }
 
-// add check for empty books
+// add check for empty booksss
 function displayAllBooks() {
   for (let i = 0; i < myLibrary.length; i += 1) {
     const book = document.createElement("li");
