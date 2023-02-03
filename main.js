@@ -42,19 +42,32 @@ function displayAllBooks() {
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("id", "read");
     checkbox.setAttribute("data-title", currBook.title);
-    listItem.append(label, checkbox);
     const remove = document.createElement("button");
     remove.textContent = "delete";
     remove.setAttribute("type", "button");
     remove.id = "remove";
-    listItem.appendChild(remove);
+    listItem.append(label, checkbox, remove);
 
     if (currBook.read) checkbox.checked = true;
     checkbox.addEventListener("change", (event) => {
-      toggleReadStatus(event.target.getAttribute("data-title"));
+      toggleReadStatus(checkbox.getAttribute("data-title"));
+    });
+
+    remove.addEventListener("click", (event) => {
+      removeBook(checkbox.getAttribute("data-title"));
+      bookList.innerHTML = "";
+      displayAllBooks();
     });
 
     bookList.appendChild(listItem);
+  }
+}
+
+function removeBook(dataTitle) {
+  for (let i = 0; i < myLibrary.length; i += 1) {
+    if (myLibrary[i].title === dataTitle) {
+      myLibrary.splice(i, 1);
+    }
   }
 }
 
