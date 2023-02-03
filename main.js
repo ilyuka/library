@@ -1,11 +1,20 @@
 /*
-    remove book 
-    change book read status
     new book btn for menu to pop up
+    design
 */
 
 const bookList = document.querySelector("ul.book-list");
 const form = document.querySelector("form");
+const add = document.querySelector(".add");
+const close = document.querySelector(".close");
+
+close.addEventListener("click", () => {
+  form.style.display = "none";
+});
+
+add.addEventListener("click", () => {
+  form.style.display = "grid";
+});
 
 const myLibrary = [];
 
@@ -35,7 +44,7 @@ function displayAllBooks() {
       }
     }
 
-    const label = document.createElement(`label`);
+    const label = document.createElement("label");
     label.setAttribute("for", "read");
     label.textContent = `read: `;
     const checkbox = document.createElement("input");
@@ -45,6 +54,7 @@ function displayAllBooks() {
     const remove = document.createElement("button");
     remove.textContent = "delete";
     remove.setAttribute("type", "button");
+    remove.style.display = "block";
     remove.id = "remove";
     listItem.append(label, checkbox, remove);
 
@@ -81,6 +91,7 @@ function toggleReadStatus(dataTitle) {
 }
 
 function addBookToLibrary() {
+  form.style.display = "none";
   const title = document.getElementById("title").value;
   const author = document.getElementById("author").value;
   const pages = document.getElementById("pages").value;

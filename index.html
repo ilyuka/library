@@ -11,8 +11,9 @@
   <body>
     <main>
       <h1>Library</h1>
+      <button type="button" class="add">Add new book</button>
 
-      <form action="">
+      <form action="" aria-live="polite">
         <label for="title">title</label>
         <input type="text" id="title" required />
 
@@ -22,10 +23,13 @@
         <label for="pages">pages</label>
         <input type="number" id="pages" min="0" required />
 
-        <label for="read">read</label>
-        <input type="checkbox" id="read" />
+        <div>
+          <label for="read">read</label>
+          <input type="checkbox" id="read" />
+        </div>
 
         <button type="submit">add book</button>
+        <button type="button" class="close">close</button>
       </form>
       <ul class="book-list"></ul>
     </main>
