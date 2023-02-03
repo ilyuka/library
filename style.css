@@ -6,3 +6,18 @@ form {
 input {
   max-width: 30ch;
 }
+
+.book-list {
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20ch, 1fr));
+  gap: 3rem;
+}
+
+.book-list > * {
+  padding: 0;
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 1rem;
+}
