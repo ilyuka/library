@@ -1,13 +1,184 @@
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/*
+  2. Remove default margin
+*/
+* {
+  margin: 0;
+}
+/*
+  3. Allow percentage-based heights in the application
+*/
+html,
+body {
+  height: 100%;
+}
+/*
+  Typographic tweaks!
+  4. Add accessible line-height
+  5. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+/*
+  6. Improve media defaults
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+  7. Remove built-in form typography styles
+*/
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+/*
+  8. Avoid text overflows
+*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-inline: 3rem;
+  background-color: rgba(39, 39, 39, 0.507);
+
+  --edu-vic: "Edu VIC WA NT Beginner", cursive;
+  --gantari: "Gantari", sans-serif;
+  --rubik-spray: "Rubik Spray Paint", cursive;
+  --rubik-vinyl: "Rubik Vinyl", cursive;
+}
+
+h1 {
+  font-family: var(--rubik-vinyl);
+  font-size: 4rem;
+  letter-spacing: 0.3rem;
+  color: brown;
+}
+
+button {
+  font-family: var(--gantari);
+  outline-color: transparent;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+button.add {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: rgb(92, 25, 25);
+  border: 3px solid rgb(92, 25, 25);
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+
+button:hover {
+  opacity: 0.7;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+main {
+  height: 100%;
+  padding-inline: 2rem;
+  background-color: bisque;
+  flex: 1;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.addBook {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  backdrop-filter: blur(2px);
+}
+
 form {
   display: grid;
   justify-items: flex-start;
+
+  padding: 1.5rem;
+  border: 2px dashed brown;
+  border-radius: 1rem;
+  background-color: rgb(253, 209, 154);
+
+  z-index: 1;
 }
 
-input {
-  max-width: 30ch;
+form > :nth-child(2n + 4),
+form > :last-child {
+  margin-top: 1rem;
+}
+
+.close {
+  justify-self: flex-end;
+  border: none;
+  outline-color: transparent;
+  color: red;
+  font-weight: 900;
+  font-size: 1.25rem;
+}
+
+form label,
+form > input {
+  font-family: var(--edu-vic);
+  font-size: 1.5rem;
+}
+
+form input[type="checkbox"] {
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+form button[type="submit"] {
+  margin-top: 2rem;
+  font-family: var(--edu-vic);
+  font-size: 1.5rem;
+  font-weight: 300;
+  border: 2px solid brown;
+  background-color: brown;
+  color: white;
+  padding-inline: 1rem;
+  border-radius: 1rem;
+  justify-self: stretch;
 }
 
 .book-list {
+  margin-top: 3rem;
+  align-self: stretch;
   list-style-type: none;
   padding: 0;
   display: grid;
@@ -16,22 +187,35 @@ input {
   align-items: flex-start;
 }
 
-.book-list > * {
-  padding: 0;
-  border: 1px solid black;
-  border-radius: 1rem;
+.book-list > li {
   padding: 1rem;
+  font-family: var(--edu-vic);
+  font-size: 1.25rem;
   word-break: break-all;
+  border: 2px solid brown;
+  border-radius: 1rem;
+  background-color: rgb(255, 233, 207);
 }
 
-form {
-  padding: 1.5rem;
+.book-list > li > * + * {
+  margin-top: 1rem;
+}
+
+button#remove {
+  font-family: var(--edu-vic);
+  outline-color: transparent;
   border: 1px solid black;
-  border-radius: 1rem;
-  position: fixed;
-  top: calc(50% - 120px);
-  left: calc(50% - 115px);
-  z-index: 1;
-  background-color: white;
-  display: none;
+  border-radius: 0.5rem;
+}
+
+button#remove:hover {
+  border: 1px solid red;
+  color: red;
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 0;
+  }
 }

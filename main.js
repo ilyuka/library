@@ -1,19 +1,21 @@
 /*
-    new book btn for menu to pop up
-    design
+  adapt for mobile
+  design
 */
 
 const bookList = document.querySelector("ul.book-list");
 const form = document.querySelector("form");
+const addBookPopUpSection = document.querySelector(".addBook");
 const add = document.querySelector(".add");
 const close = document.querySelector(".close");
+const notification = document.querySelector(".notification");
 
 close.addEventListener("click", () => {
-  form.style.display = "none";
+  addBookPopUpSection.style.display = "none";
 });
 
 add.addEventListener("click", () => {
-  form.style.display = "grid";
+  addBookPopUpSection.style.display = "flex";
 });
 
 const myLibrary = [];
@@ -44,6 +46,7 @@ function displayAllBooks() {
       }
     }
 
+    const div = document.createElement("div");
     const label = document.createElement("label");
     label.setAttribute("for", "read");
     label.textContent = `read: `;
@@ -51,12 +54,13 @@ function displayAllBooks() {
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("id", "read");
     checkbox.setAttribute("data-title", currBook.title);
+    div.append(label, checkbox);
     const remove = document.createElement("button");
     remove.textContent = "delete";
     remove.setAttribute("type", "button");
     remove.style.display = "block";
     remove.id = "remove";
-    listItem.append(label, checkbox, remove);
+    listItem.append(div, remove);
 
     if (currBook.read) checkbox.checked = true;
     checkbox.addEventListener("change", (event) => {
@@ -91,11 +95,22 @@ function toggleReadStatus(dataTitle) {
 }
 
 function addBookToLibrary() {
-  form.style.display = "none";
   const title = document.getElementById("title").value;
   const author = document.getElementById("author").value;
   const pages = document.getElementById("pages").value;
   const read = document.getElementById("read").checked;
+
+  for (let i = 0; i < myLibrary.length; i += 1) {
+    if (myLibrary[i].title === title) {
+      notification.textContent = "There is already book with this title";
+      setTimeout(() => {
+        notification.textContent = "";
+      }, 2000);
+      return;
+    }
+  }
+
+  addBookPopUpSection.style.display = "none";
 
   const book = new Book(title, author, pages, read);
   myLibrary.push(book);

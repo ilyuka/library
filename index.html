@@ -7,30 +7,43 @@
     <title>Document</title>
     <script src="./main.js" defer></script>
     <link rel="stylesheet" href="style.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner:wght@400;500;600;700&family=Gantari:ital@0;1&family=Rubik+Spray+Paint&family=Rubik+Vinyl&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <main>
       <h1>Library</h1>
       <button type="button" class="add">Add new book</button>
 
-      <form action="" aria-live="polite">
-        <label for="title">title</label>
-        <input type="text" id="title" required />
+      <section class="addBook">
+        <form action="" aria-live="polite">
+          <button type="button" class="close">X</button>
 
-        <label for="author">author</label>
-        <input type="text" id="author" required />
+          <label for="title">title</label>
+          <input type="text" id="title" maxlength="150" required />
 
-        <label for="pages">pages</label>
-        <input type="number" id="pages" min="0" required />
+          <label for="author">author</label>
+          <input type="text" id="author" maxlength="100" required />
 
-        <div>
-          <label for="read">read</label>
-          <input type="checkbox" id="read" />
-        </div>
+          <label for="pages">pages</label>
+          <input type="number" id="pages" min="0" max="10000" required />
 
-        <button type="submit">add book</button>
-        <button type="button" class="close">close</button>
-      </form>
+          <div>
+            <label for="read">read</label>
+            <input type="checkbox" id="read" />
+          </div>
+
+          <button type="submit">add book</button>
+          <p class="notification"></p>
+        </form>
+      </section>
+
       <ul class="book-list"></ul>
     </main>
   </body>
