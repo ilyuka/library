@@ -1,8 +1,3 @@
-/*
-  adapt for mobile
-  design
-*/
-
 const bookList = document.querySelector("ul.book-list");
 const form = document.querySelector("form");
 const addBookPopUpSection = document.querySelector(".addBook");
@@ -16,6 +11,11 @@ close.addEventListener("click", () => {
 
 add.addEventListener("click", () => {
     addBookPopUpSection.style.display = "flex";
+});
+
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    addBookToLibrary();
 });
 
 const myLibrary = [];
@@ -63,14 +63,14 @@ function displayAllBooks() {
         listItem.append(div, remove);
 
         if (currBook.read) checkbox.checked = true;
+
         checkbox.addEventListener("change", (event) => {
             toggleReadStatus(checkbox.getAttribute("data-title"));
         });
 
         remove.addEventListener("click", (event) => {
+            event.target.parentNode.remove();
             removeBook(checkbox.getAttribute("data-title"));
-            bookList.innerHTML = "";
-            displayAllBooks();
         });
 
         bookList.appendChild(listItem);
@@ -88,8 +88,7 @@ function removeBook(dataTitle) {
 function toggleReadStatus(dataTitle) {
     for (let i = 0; i < myLibrary.length; i += 1) {
         if (myLibrary[i].title === dataTitle) {
-            if (myLibrary[i].read === true) myLibrary[i].read = false;
-            else myLibrary[i].read = true;
+            myLibrary[i].read = !myLibrary[i].read;
         }
     }
 }
@@ -101,24 +100,18 @@ function addBookToLibrary() {
     const read = document.getElementById("read").checked;
 
     for (let i = 0; i < myLibrary.length; i += 1) {
-        if (myLibrary[i].title === title) {
-            notification.textContent = "There is already book with this title";
+        if (title === myLibrary[i].title && author === myLibrary[i].author) {
+            notification.textContent = `There is already "${title}" by ${author} in the library.`;
             setTimeout(() => {
                 notification.textContent = "";
-            }, 2000);
+            }, 3500);
             return;
         }
     }
 
     addBookPopUpSection.style.display = "none";
-
+    form.reset();
     const book = new Book(title, author, pages, read);
     myLibrary.push(book);
     displayAllBooks();
 }
-
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    addBookToLibrary();
-    form.reset();
-});
